@@ -3,8 +3,6 @@
 #define AFTER  30
 #define BEFORE 20
 
-#include<stdlib.h>
-#include<stdio.h>
 typedef struct a
 {
     int id;
@@ -22,7 +20,7 @@ void  printList(node* pn, node* pp)
     if(pn!=0)
         while(pn!=0)
         {
-            printf("ID:%d Name:%s  %d>\n",pn->id, pn->name, pn);
+            printf("ID:%d Name:%s >\n",pn->id, pn->name );
             pn= pn->next;
         }
     else
@@ -38,6 +36,7 @@ node* insertListItem(node *loc , int POS )
 
     node *newItem = (node *) malloc( sizeof(node));
     int idt; char *nm;
+//    gets(nm);
     scanf("%s %d",nm, &idt);
     newItem->name = strdup(nm);
     newItem->id=idt;
@@ -94,55 +93,19 @@ node* insertListItem(node *loc , int POS )
 
     return newItem;
 }
-void deleteItem(node* i){
-
-        if(i-> prev == 0){
-           i->id= i->next->id;
-           i->name=i->next->name;
-
-          i->next=i->next->next;
-          i->next->prev=i->prev;
-
-
-        }
-        if(i->prev !=0 && i->next!=0){
-            i->prev->next = i->next;
-            i->next->prev=i->prev;
-        }
-        else{
-            if(i->next==0){
-                i->prev->next=0;
-            }
-        }
-}
-int ID(){
-    int Iid;
-    scanf("%d", &Iid);
-    return Iid;
-}
 main()
 {
 
     node *listSTART=0, *ptr;
-    int i =1,n;
-    scanf("%d", &n);
-    printf("Enter Your Name & ID : \n");
     listSTART = insertListItem(listSTART, AT_BEG );
     ptr=listSTART;
-    while(i<=n-1){
-        ptr = insertListItem(ptr, AT_END );
-
-        i++;
-    }
-    printList(listSTART,0);
-
-
-    printf("Which id you want to delete : \n");
-    deleteItem(searchLocById(listSTART, ID()));
+    ptr = insertListItem(ptr, AT_END );
+    ptr = insertListItem(ptr, AT_END );
+//    insertListItem(ptr, "Fokir", 86 , AFTER );
+//    insertListItem( searchLocById(listSTART, 76), "Fokir Nowshad", 96 , AFTER );
     printList(listSTART,0);
 
     printf("\n\n");
-
+  printList(0, ptr);
 }
-
 
